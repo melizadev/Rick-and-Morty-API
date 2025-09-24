@@ -43,7 +43,7 @@ const Episodes = () => {
     } catch (err) {
       setError(err);
     } finally {
-  setTimeout(() => {
+      setTimeout(() => {
         setLoading(false);
       }, 3000);
     }
@@ -52,12 +52,11 @@ const Episodes = () => {
     if (episodes.length === 0) {
       setLoading(true);
       fetchEpisodes();
-  
     }
   }, []);
   useEffect(() => {
     if (episodes.length > 0)
-     localStorage.setItem("episodes", JSON.stringify(episodes));
+      localStorage.setItem("episodes", JSON.stringify(episodes));
     console.log(episodes);
   }, [episodes]);
 
@@ -97,12 +96,15 @@ const Episodes = () => {
                   </td>
                   <td className="w-[80%] p-2">
                     <div className="">
-                      {episode.characters.slice(0, 10).map((epis, idx) => (
-                        <span className="font-fredoka" key={epis.id}>
-                          {epis.name}
-                          {idx < 9 ? ", " : "."}
-                        </span>
-                      ))}
+                      {episode.characters
+                        .filter((epis) => epis !== null)
+                        .slice(0, 10)
+                        .map((epis, idx, arr) => (
+                          <span className="font-fredoka" key={epis.id}>
+                            {epis.name}
+                            {idx < arr.length - 1 ? ", " : "."}
+                          </span>
+                        ))}
                     </div>
                   </td>
                 </tr>
