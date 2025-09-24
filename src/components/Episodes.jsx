@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import SkeletonEpisodes from "./skeleton/SkeletonEpisodes";
 const Episodes = () => {
   const [episodes, setEpisodes] = useState(() => {
-    const saved = localStorage.getItem("epsisodes");
+    const saved = localStorage.getItem("episodes");
     return saved ? JSON.parse(saved) : [];
   });
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const baseUrl = "https://rickandmortyapi.com/api";
   const fetchEpisodes = async () => {
     try {
@@ -50,6 +50,7 @@ const Episodes = () => {
   };
   useEffect(() => {
     if (episodes.length === 0) {
+      setLoading(true);
       fetchEpisodes();
   
     }
