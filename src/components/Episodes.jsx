@@ -93,12 +93,15 @@ const Episodes = () => {
                   </td>
                   <td className="w-[80%] p-2">
                     <div className="">
-                      {chapter.characters.slice(0, 10).map((char, idx) => (
-                        <span className="font-fredoka" key={char.id}>
-                          {char.name}
-                          {idx < 9 ? ", " : "."}
-                        </span>
-                      ))}
+                      {chapter.characters
+                        .filter((char) => char !== null)
+                        .slice(0, 10)
+                        .map((char, idx, arr) => (
+                          <span className="font-fredoka" key={char.id}>
+                            {char.name}
+                            {idx < arr.length - 1 ? ", " : "."}
+                          </span>
+                        ))}
                     </div>
                   </td>
                 </tr>
