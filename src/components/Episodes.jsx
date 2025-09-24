@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import SkeletonEpisodes from "./skeleton/SkeletonEpisodes";
 const Episodes = () => {
-  const [chapters, setChapters] = useState(() => {
-    const saved = localStorage.getItem("chapters");
+  const [episodes, setEpisodes] = useState(() => {
+    const saved = localStorage.getItem("epsisodes");
     return saved ? JSON.parse(saved) : [];
   });
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const baseUrl = "https://rickandmortyapi.com/api";
-  const fetchChapters = async () => {
+  const fetchEpisodes = async () => {
     try {
       const response = await fetch(`${baseUrl}/episode`);
       if (!response.ok) throw new Error("Error en fetch inicial");
       const items = await response.json();
-      const chapters = items.results;
+      const episodesRes = items.results;
 
-      const chaptersWithDetails = await Promise.all(
-        chapters.map(async (chapter) => {
-          const urls = chapter.characters || [];
+      const EpisodesWithDetails = await Promise.all(
+        episodesRes.map(async (episode) => {
+          const urls = episode.characters || [];
           const detailPromises = urls.map(async (url) => {
             try {
               const r = await fetch(url);
@@ -33,29 +33,32 @@ const Episodes = () => {
           const details = await Promise.all(detailPromises);
 
           return {
-            ...chapter,
+            ...episode,
             characters: details,
           };
         })
       );
 
-      setChapters(chaptersWithDetails);
+      setEpisodes(EpisodesWithDetails);
     } catch (err) {
       setError(err);
     } finally {
-      setLoading(false);
+  setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     }
   };
   useEffect(() => {
-    if (chapters.length === 0) {
-      setLoading(true);
-      fetchChapters();
+    if (episodes.length === 0) {
+      fetchEpisodes();
+  
     }
   }, []);
   useEffect(() => {
-    if (chapters) localStorage.setItem("chapters", JSON.stringify(chapters));
-    console.log(chapters);
-  }, [chapters]);
+    if (episodes.length > 0)
+     localStorage.setItem("episodes", JSON.stringify(episodes));
+    console.log(episodes);
+  }, [episodes]);
 
   if (error) return <div>Error: {error.message}</div>;
   if (loading) return <SkeletonEpisodes />;
@@ -79,23 +82,23 @@ const Episodes = () => {
               </tr>
             </thead>
             <tbody className="">
-              {chapters.map((chapter) => (
+              {episodes.map((episode) => (
                 <tr
-                  key={chapter.id}
+                  key={episode.id}
                   className="odd:bg-[#ececec] even:bg-[#8699c4] border-b  odd:text-gray-700 even:text-white  border-gray-200 h-[45px]"
                 >
                   <td className="w-[20%] font-fredoka p-2">
-                    <span className="font-semibold"> {chapter.name} </span>{" "}
+                    <span className="font-semibold"> {episode.name} </span>{" "}
                     <span className="text-[14px]">
-                      <br /> {chapter.episode}
-                      <br /> {chapter.air_date}
+                      <br /> {episode.episode}
+                      <br /> {episode.air_date}
                     </span>
                   </td>
                   <td className="w-[80%] p-2">
                     <div className="">
-                      {chapter.characters.slice(0, 10).map((char, idx) => (
-                        <span className="font-fredoka" key={char.id}>
-                          {char.name}
+                      {episode.characters.slice(0, 10).map((epis, idx) => (
+                        <span className="font-fredoka" key={epis.id}>
+                          {epis.name}
                           {idx < 9 ? ", " : "."}
                         </span>
                       ))}

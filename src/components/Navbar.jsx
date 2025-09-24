@@ -2,7 +2,7 @@ import Logo from "../assets/logo.avif";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
-    <div className="w-full h-[78px] bg-white shadow-md flex items-center justify-center gap-6 px-4">
+    <div className="w-full h-[13vh] bg-white shadow-md flex items-center justify-center gap-6 px-4">
       <Link to="/">
         <img src={Logo} alt="" className="h-[70px] jello-horizontal" />
       </Link>
