@@ -9,7 +9,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Banner />} />
+        <Route path="/Rick-and-Morty-API/" element={<Banner />} />
         <Route path="/characters" element={<Characters />} />
         <Route path="/episodes" element={<Episodes />} />
       </Routes>
