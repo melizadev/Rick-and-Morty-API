@@ -1,4 +1,4 @@
-import Characters from "./components/Character";
+import Characters from "./components/Characters";
 import Banner from "./components/Banner";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
@@ -9,7 +9,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Banner />} />
+        <Route path="/Rick-and-Morty-API/" element={<Banner />} />
         <Route path="/characters" element={<Characters />} />
         <Route path="/episodes" element={<Episodes />} />
       </Routes>

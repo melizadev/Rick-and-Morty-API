@@ -51,7 +51,7 @@ const Characters = () => {
 
   function getItemsPerPage() {
     const width = window.innerWidth;
-    if (width >= 1200) return 5;
+    if (width >= 1200) return 6;
     if (width >= 768) return 3;
     if (width >= 400) return 2;
 
@@ -68,7 +68,7 @@ const Characters = () => {
       <h2 className="text-3xl font-indie font-semibold text-white ">
         Characters
       </h2>
-      <div className="flex items-center justify-center  gap-6 w-full">
+      <div className="flex items-center justify-center px-2  gap-6 w-full">
         {visibleItems.map((item) => (
           <div
             key={item.id}
