@@ -16,9 +16,6 @@ const Characters = () => {
     if (characters.length === 0) {
       setLoading(true);
       fetchCharacters();
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
     }
   }, []);
 
@@ -46,12 +43,16 @@ const Characters = () => {
     } catch (err) {
       console.error("Error fetching data:", err);
       setCharacters([]);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
   function getItemsPerPage() {
     const width = window.innerWidth;
-    if (width >= 1200) return 6;
+    if (width >= 1200) return 5;
     if (width >= 768) return 3;
     if (width >= 400) return 2;
 
@@ -105,7 +106,7 @@ const Characters = () => {
           <FaArrowAltCircleLeft color="#352b2b" size={"20px"} />
         </button>
         <p className="font-fredoka text-[15px] text-neutral-800">
-          Pg {page} of {pages}{" "}
+          {page + 1} of {pages}{" "}
         </p>
         <button
           onClick={() => setPage((p) => Math.min(p + 1, pages - 1))}

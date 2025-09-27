@@ -1,9 +1,9 @@
-const SkeletonEpisodes = () => {
+const SkeletonLocations = () => {
   return (
-    <div className="w-full min-h-[81.7vh] h-full bg-[url('./assets/episodes.avif')] bg-cover bg-center flex items-center justify-center px-2">
+    <div className="w-full min-h-[81.7vh] h-full bg-[url('./assets/location.avif')] bg-cover bg-center flex items-center justify-center px-2">
       <div className="w-full max-w-4xl p-4 rounded-lg flex flex-col items-center justify-start">
-        <h2 className="text-3xl pb-4 font-indie font-semibold text-white mb-4">
-          List of Episodes
+        <h2 className="text-3xl font-indie font-semibold text-gray-50 mb-4">
+          List of Locations
         </h2>
         <div className="overflow-x-auto w-full bg-white rounded-lg shadow-md animate-pulse">
           <table className="min-w-full rounded-lg bg-gray-50">
@@ -47,4 +47,4 @@ const SkeletonEpisodes = () => {
     </div>
   );
 };
-export default SkeletonEpisodes;
+export default SkeletonLocations;
